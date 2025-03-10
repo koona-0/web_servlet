@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>아이디 찾기</title>
+</head>
+<body>
+
+<form id="frm" method="post" action="./idsearch.do">
+고객명 : <input type="text" name="mname"><br>
+연락처 : <input type="text" name="mcall">"-"미포함 숫자만 입력하세요<br>
+이메일 : <input type="text" name="memail"><br>
+<input type="button" value="아이디찾기" class="btn" onclick="step_id()">
+</form>
+
+
+</body>
+
+<script>
+function step_id(){
+	if(frm.mname.value==""){
+		alert("고객명을 입력해주세요");
+	}else if(frm.mcall.value==""){
+		alert("연락처를 입력해주세요");
+	}else if(frm.memail.value==""){
+		alert("이메일을 입력해주세요");
+	}else{
+		frm.submit();
+	}
+}
+</script>
+
+</html>

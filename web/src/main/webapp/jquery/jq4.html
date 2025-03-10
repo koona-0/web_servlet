@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax - jquery (GET)</title>
+<script src="./jquery.js"></script>
+<script>
+$(function(){
+	var $data;	//ajax에서 return 받는 결과값(Back-end 주는 내용)
+	$("#btn").click(function(){
+		var $mid = $("#mid").val();
+		if($mid==""){
+			alert("아이디를 입력하셔야 합니다.");
+		}else{	//Ajax - Jquery 전용 (GET)
+		/*
+		두가지 방식 
+		$.ajax({}); : 여기서 GET과 POST를 정함 
+		$.get({});	: GET 전용 
+		$.post({});	: POST 전용 
+		*/
+		
+		$.ajax({
+			//url : back-end쪽 경로 
+			url:"../shop/idcheck.do?sid="+$mid,
+			cache:false,	//기본은 true => 새로고침해도 값을 가지고있음 / false : 자동으로 갱신하는 형태  
+			type:"GET",		//GET, POST, PUT, DELETE
+			dataType:"HTML",	//TXT,HTML,JSOP,XML	
+			//dataType을 "TXT"로 쓸수도있는데 백에서 "ok","no"로 보냈지만 메세지로 보냈기때문에 HTML로 설정해야 오류안남 만약 그래도 TXT를 쓰고싶다면 printWriter로 직접찍어서 포워드해서 txt파일로 만들어서 프론트한테 줘야함 
+			success:function($data){	//통신성공 및 ㄱeturn값 처리 
+				console.log($data);
+			},
+			error:function(){		//Back-end와 통신에러가 발생시 
+				console.log("통신 에러");
+			}
+		});
+		
+		}
+	});
+});
+</script>
+</head>
+<body>
+아이디 : <input type="text" id="mid">
+<input type="button" value="중복체크" id="btn">
+</body>
+</html>

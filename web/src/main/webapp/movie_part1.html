@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>영화 예매 시스템</title>
+</head>
+<body>
+
+<form id="frm" method="post" action="./movie_part2.do">
+<p>영화 예매 시스템</p>
+고객명 : <input type="text" name="mname"><br>
+연락처 : <input type="text" name="mtel" maxlength="11"> "-"없이 숫자만 입력<br><br>
+<p>영화 선택</p>
+<ol>
+<li><input type="radio" name="movie_name" value="히트맨2">히트맨2</li>
+<li><input type="radio" name="movie_name" value="써니데이">써니데이</li>
+<li><input type="radio" name="movie_name" value="브루탈리스트">브루탈리스트</li>
+<li><input type="radio" name="movie_name" value="히어">히어</li>
+<li><input type="radio" name="movie_name" value="하얼빈">하얼빈</li>
+</ol>
+예매일자 : <input type="date" name="mdate"><br>
+<input type="button" value="예매하기" onclick="movieok()">
+</form>
+
+</body>
+<script>
+var movieok = function(){	
+	if(frm.mname.value==""){
+		alert("고객명을 입력하세요!");
+		frm.mname.focus();
+	} else if(frm.mtel.value==""){
+		alert("연락처를 입력하세요!");
+		frm.mtel.focus();
+	} else if(isNaN(frm.mtel.value)){
+		alert("연락처는 숫자만 입력하세요!");
+		frm.mtel.focus();
+	} else if(frm.mtel.value.length < 10){
+		alert("연락처를 제대로 입력하세요!");
+		frm.mtel.focus();
+	} else if(frm.movie_name.value==""){
+		alert("영화를 선택하세요!");
+	}  else if(frm.mdate.value==""){
+		alert("날짜를 선택하세요!");
+	}
+	else{
+		frm.submit();
+	}
+}
+</script>
+</html>

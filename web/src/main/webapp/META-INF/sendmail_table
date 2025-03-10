@@ -1,0 +1,9 @@
+create table send_mail(
+midx int unsigned auto_increment comment '자동증가값',
+to_name char(40) not null comment '담당자 성함',
+to_mail varchar(50) not null comment '회신받을 메일주소',
+subject varchar(100) not null comment '제목',
+context text not null comment '내용',
+mdate timestamp not null default current_timestamp comment '날짜',
+primary key(midx)
+);

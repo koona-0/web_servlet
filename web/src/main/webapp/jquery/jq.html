@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Jquery 사용법</title>
+<!-- jquery 엔진을 로드
+jquery 사이트에서 파일을 복붙애서 자스파일을 만들어서 여기에 스크립트 연결
+ -->
+<script src="./jquery.js"></script>
+<script>
+//아래 함수는 책버전 (요즘 이렇게 안씀)
+$(document).ready(function(){
+	var $a = "홍길동";
+	console.log($a);
+});
+
+//단축어 버전 (실무에서 사용)
+$(function(){
+	var $a = "홍길동";
+	console.log($a);
+});
+
+//더단축 버전 (실무에 사용 고수버전)
+$(()=>{
+	var $a = "홍길동";
+	console.log($a);
+})
+
+// var a와 var $a 는 다름! 자스와 혼용 => 안돼! jquery 쓸땐 변수 $붙여 쓰기 
+// jquery는 $로 시작하기
+
+$(function(){
+	//함수는 항상 이 안에 넣어야함 밖에 쓰면 작동안함!! 주의 
+	
+	$("#btn").click(function(){		//아이디 속성으로 이벤트 핸들링 
+		console.log("아이디 테스트");
+	});
+	$(".btn").click(function(){		//클래스 속성으로 이벤트 핸들링 
+		console.log("클래스 테스트");
+	});
+	
+	$("#btn2").click(function(){ 
+		//if(frm.mid.value==""){
+		//	alert("아이디를 입력하세요!");
+		//}
+		
+		/*
+		//자스버전 아이디 가져오기 코드 => jquery랑 혼용하면 망함!
+		var m = doument.getElementById("mid");
+		console.log(m.value);
+		*/
+		
+		/*
+		//jquery버전 아이디 가져오기
+		var $m = $("#mid").val();
+		console.log($m);
+		*/
+		
+		/*
+		//val() = value 
+		//값 넣기 
+		$("#mid").val("홍길동");	//해당 오브젝트에 값을 이관
+		*/
+		
+		var $m = $("#mid").val();
+		if($m==""){
+			alert("아이디를 입력하세요!");
+			$("#mid").focus();
+		}else{
+			location.href="./jq2.html";
+		}
+	});
+	
+	//click, submit, change 다 있음 
+	$("#btn3").click(function(){
+		$abc();
+		abc();
+	});
+	
+	//책버전 $.fn.abc (요즘안씀)
+	$abc = function(){	//일반 jquery 함수 
+		console.log("$abc()");
+	}
+	
+	function kkk(){
+		console.log("kkk함수");
+	}
+	
+	
+});
+
+	function abc(){
+		console.log("abc()");
+	}
+
+	function zzz(){
+		$abc();
+		//kkk();	//jquery 엔진 안에 들어간 함수라서 호출 불가능함 !!!!
+		//jquery 안에 있는 js함수를 호출 할 수 없음 ! 
+	}
+
+
+</script>
+</head>
+<body>
+
+
+<!-- jquery는 onclick이 없음 id가 난무함 -->
+<input type="button" value="클릭" id="btn"><br>
+<!-- jquery는 클래스로 핸들링하면 충돌 많이 발생해서 주로 아이디로 핸들링함  -->
+<input type="button" value="클릭" class="btn"><br>
+<br><br><br>
+
+<input type="text" name="mid" id="mid">
+<input type="button" value="중복체크" id="btn2">
+<br><br><br>
+
+<input type="button" value="핸들링" id="btn3">
+<input type="button" value="핸들링2" onclick="zzz()">
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

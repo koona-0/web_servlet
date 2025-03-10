@@ -1,0 +1,12 @@
+create table notice(
+nidx int unsigned auto_increment comment '자동증가값',
+subject varchar(100) not null comment '게시판 제목',
+writer char(50) not null comment '글쓴이',
+pw char(50) not null comment 'md5형태 패스워드',
+texts text not null comment '내용 editor',
+filenm varchar(200) null comment '사용자가 업로드한 파일명',
+nfile text null comment '서버에 저장된 파일경로 및 파일명',
+nview int not null default '1' comment '조회수',
+ndate timestamp not null default current_timestamp  comment '등록일',
+primary key(nidx)
+);

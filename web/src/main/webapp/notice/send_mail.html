@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>메일전송</title>
+</head>
+<body>
+
+<form id="f" method="post" action="./mailok.do">
+<input style="width:200px;" type="text" name="to_name" placeholder="담당자 성함을 입력하세요"><br>
+<input style="width:200px;" type="text" name="to_mail" placeholder="회신받을 메일주소를 입력하세요"><br>
+<input style="width:200px;" type="text" name="subject" placeholder="제목을 입력하세요"><br>
+<input style="width:200px;height:200px;" type="text" name="context" placeholder="내용을 입력하세요"><br>
+<input type="button" value="메일 전송" onclick="send_btn()">
+</form>
+
+</body>
+<script>
+function send_btn(){
+	if(f.to_name.value==""){
+		alert("담당자 성함을 입력하세요");
+		f.to_name.focus();
+	}else if(f.to_mail.value==""){
+		alert("회신받을 메일주소를 입력하세요");
+		f.to_mail.focus();
+	}else if(f.subject.value==""){
+		alert("제목을 입력하세요");
+		f.subject.focus();
+	}else if(f.context.value==""){
+		alert("내용을 입력하세요");
+		f.context.focus();
+	}else{
+		f.submit();			
+	}
+}
+</script>
+</html>

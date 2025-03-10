@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>공지사항 글등록 페이지</title>
+<script src="./ckeditor/ckeditor.js?v=6"></script>
+</head>
+<!-- 
+CKEditor 사용! 
+LTS는 유료임 작동X 
+기본 다운해서 적용하기  
+Easy Image 체크하지않기 
+
+압축 풀어서 ckeditor 파일 안에 있는 항목만 사용 why? 다른 파일 넣으면 보안 쓰레기됨 
+
+* 이미지 미리보기에 주저리주저리 지우기 셋팅 
+./ckeditor/plugins/image/dialogs/image.js 에서 Lorem ipsum검색해서 해당 따옴표 안을 모두 비우기
+
+* 버전 보안 빨간 알림창 지우기 
+./ckeditor/config.js 파일
+함수 안에 
+config.versionCheck = false;
+넣기
+
+* 에디터 위 기능을 핸들링 (필요한 기능만 쓰기, 물음표,버전 안보이게하기)
+에디터 홈페이지 > Customize > Online Builder > 필요한건 넣고 필요없는건 빼기 > 최하단 Download CKEditor (OS) 다운해서 config.js파일만 덮어쓰기함
+거기에 알람지우는 config.versionCheck = false; 만 추가하기 
+
+* 이놈은 textarea 마냥 resize가 됨 줄었다 늘었다.. 그거 세팅
+config.js파일에 
+config.resize_enable = false;
+추가
+-->
+<!-- 
+[국내 - WEB EDITOR]
+1. Daum Editor(Kakao)
+2. Naver Editor
+3. Namo Editor
+
+[국외 - WEB EDITOR]
+1. CKEditor
+2. Toast Editor - React전용 
+3. DEXTUpload Editor
+4. Quill Editor - Vue전용 
+
+=> WEB EDITOR의 글은 코드 형식으로 DB에 저장! 
+
+==
+
+db설계시 
+html에는 "아이디"가 없지만 아이디를 히든으로 해서 DB에 같이 넣어줘야함 실무에서도 이렇게 함 
+그리고 "조회수"도 넣어야함 ! 추천이있는 게시판이라면 추천수도 !
+=> 게시판은 항상 리스트를 같이 봐야함 !  
+
+첨부파일 처리시 
+사용자 첨부파일 => 123.xlsx => Server => 20250306_123.xlsx
+이렇게 해야 덮어쓰기되지 않음 !
+사용자가 게시판 첨부파일 확인시
+123.xlsx => 20250306_123.xlsx
+DB엔 "파일 이름", "파일 경로" 를 넣으며 null 속성을 넣어줌 ! 파일 첨부 안할수도 있으니까 
+ -->
+<body>
+
+<!-- 첨부파일 있으니까! 1. post 2. enctype 3. @MultipartConfig 필수 ! -->
+<form id="frm" method="post" action="./notice_writeok.do" enctype="multipart/form-data">
+제목 : <input type="text" name="subject"><br>
+글쓴이 : <input type="text" name="writer"><br>
+비밀번호 : <input type="password" name="pw"><br>
+내용 : <textarea name="texts" id="editor"></textarea><br>
+첨부파일 : <input type="file" name="nfile"><br>
+<input type="button" value="글등록" onclick="writeck()">
+</form>
+
+</body>
+<script>
+
+//window.onload : 현재 페이지가 실행됐을때
+//이건 꼭 하단 스크립트에 적어야함! 
+	window.onload = function() {
+		var ck = CKEDITOR.replace("editor", {
+			width : 900,
+			height : 400,
+			versionCheck : false
+		});
+	}
+</script>
+<script src="./notice_write.js?v=1"></script>
+</html>

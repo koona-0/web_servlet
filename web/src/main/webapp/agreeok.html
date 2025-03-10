@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원가입 약관</title>
+</head>
+<body>
+	<form id="f" method="post" action="./agreeok.do">
+		<p>회원가입 약관</p>
+		<!-- 전체선택 -->
+		<label for="allselect">전체 선택</label>
+		<input type="checkbox" id="allselect" name="checkok" onclick='selectAll()' /><br>
+		<!-- 서비스 동의 -->
+		<label for="serviceok">서비스 이용약관 동의 (필수)</label>
+		<input type="checkbox" id="serviceok" name="checkok" required /><br>
+		<!-- 개인정보 동의 -->
+		<label for="infook">개인정보 수신 및 이용 (필수)</label>
+		<input type="checkbox" id="infook" name="checkok" required/><br>
+		<!-- 이메일 동의 -->
+		<label for="emailok">이메일 정보 수신 약관 (필수)</label>
+		<input type="checkbox" id="emailok" name="checkok" required/><br>
+		<!-- 광고 동의 -->
+		<label for="addok">광고성 정보 수신 (선택)</label>
+		<input type="checkbox" id="addok" name="checkok" /><br><br>	
+		<button type="button" onclick="agree()">회원가입</button>
+	</form>
+</body>
+<script>
+// 전체 선택 실행 함수
+function selectAll(){
+	// 전체 선택 [] 상태 값을 allChecked에 저장 [on/off]
+    const allChecked = document.getElementById('allselect').checked;
+	// 모든 체크박스를 name="checkok" 값으로 가져와 allcheck에 저장
+    const allcheck = document.getElementsByName('checkok');
+	// 모든 체크박스에 반복
+    for (var i = 0; i < allcheck.length; i++) {
+    	// i번째 체크박스
+        const checkbox = allcheck[i];
+    	// i번째 체크박스의 상태를 전체 선택 체크박스 상태와 동일하게 적용
+        checkbox.checked = allChecked;
+    }
+}
+
+// 필수 선택 확인 + 회원가입버튼 함수
+function agree(){
+	 // 필수에 해당하는 체크박스의 on 상태값을 각 변수에 저장
+	 const serviceok = document.getElementById('serviceok').checked;
+     const infook = document.getElementById('infook').checked;
+     const emailok = document.getElementById('emailok').checked;
+     
+     // 하나라도 체크박스 상태가 on이 아닐 경우 alert 출력 후 return
+     if (!serviceok || !infook || !emailok) {
+         alert("모든 필수 항목을 동의해야 회원가입이 가능합니다.");
+         return;
+     }
+
+     document.getElementById('f').submit();
+}
+</script>
+</html>
