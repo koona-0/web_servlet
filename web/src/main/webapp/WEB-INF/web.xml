@@ -164,4 +164,13 @@
 <url-pattern>/shop/updatepw.do</url-pattern>
 </servlet-mapping>
 
+<servlet>
+<servlet-name>notice_delete</servlet-name>
+<servlet-class>notice.notice_delete</servlet-class>
+</servlet>
+<servlet-mapping>
+<servlet-name>notice_delete</servlet-name>
+<url-pattern>/notice/notice_delete.do</url-pattern>
+</servlet-mapping>
+
 </web-app>
