@@ -46,6 +46,7 @@ public class notice_delete extends HttpServlet {
                this.ps = this.con.prepareStatement(this.sql);
                this.ps.setString(1, nidx);
                this.result = this.ps.executeUpdate();
+               System.out.println(this.result);
                if(this.result > 0) {
                   this.pw.write("<script>"
                         + "alert('게시물을 삭제하였습니다.');"

@@ -27,11 +27,7 @@ public class m_noticelist {
 			this.spage = (s - 1) * ea;
 		}else {
 			this.spage = s;		//sql query문의 limit를 사용하기 위함 
-			
 		}
-		
-		
-		
 	}
 	
 	public ArrayList<ArrayList<String>> db_data(){

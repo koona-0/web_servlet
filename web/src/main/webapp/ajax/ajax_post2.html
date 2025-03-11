@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax POST 전송방식 (jQuery)</title>
+<script src="../jquery/jquery.js"> </script>
+<script>
+//실무 고수 코드 
+$(()=>{
+	$("#btn").click(()=>{
+		if($("#mid").val()==""){
+			alert("아이디를 입력하세요!");
+		}else if($("#memail").val()==""){
+			alert("이메일을 입력하세요!");
+		}else{
+			//ajax post 통신문법
+			$.ajax({
+				url : "./ajax_postok.do",	//백엔드 경로 
+				type: "post",		//전송방식 
+				contentType : "application/x-www-form-urlencoded",	//전송시 암호화 //이거 굳이 안넣어도됨 jQuery는 기본적으로 탑재되어있음
+				cache : false,	//브라우저 캐시메모리 초기화 //매우중요 이거안쓰면 캐시에 저장됨
+				//post전송시 해당 방식으로 전송 
+				/*
+				//데이터 하나 전송
+				data : {	
+					"userid" : $("#mid").val()
+				},
+				*/
+				//데이터 여러개 전송 (콤마로 연결) 
+				data : {	
+					"userid" : $("#mid").val(),
+					"usermail" : $("#memail").val() 
+				},
+				success:function(response){	//xhr : 200 통신 발생시 작동되는 함수  
+					console.log(response);
+				},
+				error:function(error){		//xhr 200외의 숫자 적용된 경우 
+					console.log("오류발생 : ", error);
+				}
+			});
+		}
+	});
+});
+
+
+</script>
+</head>
+<body>
+<!-- form 통신이 아닐 경우는 name 사용X -->
+아이디 : <input type="text" id="mid"><br>
+이메일 : <input type="text" id="memail"><br>
+<input type="button" value="전송" id="btn">
+
+</body>
+<script>
+
+
+
+</script>
+</html>
