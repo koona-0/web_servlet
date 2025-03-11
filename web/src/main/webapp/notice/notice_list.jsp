@@ -8,7 +8,7 @@ ArrayList<ArrayList<String>> notice = (ArrayList<ArrayList<String>>)request.getA
 페이징 생성방법
 1. 한 페이지당 몇개씩 데이터를 출력할 것인지를 설정합니다.
 2. 데이터베이스에 있는 데이터의 총 갯수 / 한페이지당 갯수 (소수점)
-3. Math.ceil 사용하는 이유는 1.1 1.6 => 반올림으로 페이지가 추가 되도록 합니다.
+3. Math.ceil 사용하는 이유는 1.1 1.6 => 올림으로 페이지 추가 
 */
 String total_page = notice.get(0).get(5);
 int pg = 1;

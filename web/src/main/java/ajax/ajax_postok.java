@@ -21,25 +21,17 @@ public class ajax_postok extends HttpServlet {
 		//아래 두 줄은 상대방의 주소로 전송시 CORS를 방지하는 코드
 		response.addHeader("Access-Control-Allow-Origin", "*");	// 모든 아이피 허용 //*대신 아이피넣으면 해당 아이피만 허용  
 		response.addHeader("Access-Control-Allow-Credentials", "true");
-
-		
-		
-		
 		
 		String userid = request.getParameter("userid");
 		String usermail = request.getParameter("usermail");
 		String msg = "";	//ok : 정상 아이디, no : 아이디 오류 발생, error : 백엔드 오류
 		
-		System.out.println(userid + usermail);
-		
 		this.pw = response.getWriter();
-		
 		if(userid.equals("hong") && usermail.equals("hong@nate.com")) {
 			msg = "no";
 		}else {
 			msg = "ok";
 		}
 		this.pw.print(msg);	//Front-end에게 보내는 값 
-		
 	}
 }

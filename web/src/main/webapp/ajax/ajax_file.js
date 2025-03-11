@@ -24,7 +24,4 @@ function ajax_post(mfile){
 	http.open("post","./ajax_fileok.do", true);
 	//http.setRequestHeader("content-type","multipart/form-data");	//formdata사용시 필요없음 
 	http.send(formdata);	//FormData 함수의 값을 send 함수에 인자값으로 적용하여 전송 
-	
-	
 }
-
