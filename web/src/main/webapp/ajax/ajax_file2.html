@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <title>Ajax - File 전송 (Jquery)</title>
+      <script src="../jquery/jquery.js"></script>
+      <script>
+      $(function() {
+         $("#btn").click(function() {
+            if($("#mfile").val==""){
+               alert("파일을 첨부해야 합니다.");
+            }else{
+            	/*
+            	[jQuery Ajax I/O 형태 두가지 방식]
+            	1. <form>태그 선언 후 new FormData()를 이용하여 Back-end로 전달		//실무에서 안씀  
+            	2. <form>태그가 없는 경우 : 아이디로 []배열기호 + files 배열기호[] 모두 적용해야함  
+            	*/
+            	
+				/* 				
+				id가 frm인 폼태그가 있을때 
+				var $formdata = new FormData($("#frm")[0]); 
+				*/
+				
+            	//폼태그가 없을때 => FormData 사용 
+            	/*
+            	//정통핸들링 
+            	var $fileup = $("#mfile")[0];
+            	var $file = $fileup.files[0];
+            	console.log($file);
+            	var $formdata = new FormData();
+            	console.log($formdata);
+            	$formdata.append("mfile",$file);
+            	console.log($formdata.get("mfile"));
+            	*/
+            	
+            	//위 코드 축약형 ! 고수코드 
+            	var $formdata = new FormData();
+            	$formdata.append("mfile",$("#mfile")[0].files[0]);
+            	console.log($formdata.get("mfile"));
+            	
+            	
+               $.ajax({
+                  url : "./ajax_fileok.do",
+                  cache : false,
+                  type : "post",
+                  dataType : "HTML",
+                  data : $formdata,
+                  contentType : false,		//multipart/form-data를 위해 false로 설정 
+	              processData : false,		//data를 문자화하지 않도록 설정 
+                  success : function(result){
+                	  console.log(result);
+                	  if(result=="ok"){
+                		  alert("올바르게 파일이 전송되었습니다");
+                	  }
+                  },
+                  error : function(error){
+                	  console.log(error);
+                  }
+               });
+               
+               //보이는것처럼 제이쿼리가 자스보다 더 복잡함 그래서 실무에서는 웬만하면 사람들이 핸들링이 쉬운 자스를 쓰려고 함 
+               
+            }
+         });
+      });
+      </script>
+   </head>
+   <body>
+      이미지 첨부파일 : <input type="file" id="mfile"><br>
+      <input type="button" value="전송" id="btn">
+   </body>
+</html>
